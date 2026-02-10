@@ -63,7 +63,7 @@ async def search_vacancies(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(vac, parse_mode='Markdown')
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token('8513886048:AAHQQ9BhBWQAoarxxvlo8hoRVbpqN0mD-X0').build()
+    application = ApplicationBuilder().token('').build()
 
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, search_vacancies))
