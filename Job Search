@@ -47,6 +47,8 @@ def get_vacancies(query: str, area=DEFAULT_AREA, per_page=5):
         results.append(f"*{name}*\nКомпания: {employer}\nГород: {city}\nЗарплата: {salary}\n[Ссылка на вакансию]({url})")
     return results if results else ["Вакансий по запросу не найдено."]
 
+#Начальное приветствие
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_areas[update.effective_user.id] = DEFAULT_AREA
     await update.message.reply_text(
@@ -79,9 +81,11 @@ async def list_areas(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     data = response.json()
-    # Формируем список регионов первого и второго уровня (например, страны и регионы)
+
+    # Формируем список регионов  
     # Для простоты выводим только регионы с id и названием во вложенных областях Москвы, СПб, и т.д.
-    # Можно сделать более глубокий обход, но для краткости возьмём 2 уровня.
+
+
     regions = []
 
     def extract_areas(areas_list, prefix=""):
@@ -92,7 +96,7 @@ async def list_areas(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     extract_areas(data)
 
-    # Ограничим количество символов в сообщении , по этому разбиваем на части
+    # Ограничим количество символов в сообщении , по этому разбиваем на части. Всё из-за ограничений тг
     max_len = 4000
     text = "*Список регионов и их номеров:*\n"
     chunk = text
