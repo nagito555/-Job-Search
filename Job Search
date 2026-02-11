@@ -23,6 +23,8 @@ def format_salary(salary):
         return f"До {salary_to} {currency}"
     return "Не указана"
 
+#То, как будет отображаться резюме. 
+
 def get_vacancies(query: str, area=DEFAULT_AREA, per_page=5):
     params = {
         "text": query,
@@ -90,7 +92,7 @@ async def list_areas(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     extract_areas(data)
 
-    # Ограничим количество символов в сообщении (Telegram ~4096), поэтому разбиваем на части
+    # Ограничим количество символов в сообщении , по этому разбиваем на части
     max_len = 4000
     text = "*Список регионов и их номеров:*\n"
     chunk = text
@@ -102,7 +104,7 @@ async def list_areas(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if chunk:
         await update.message.reply_text(chunk, parse_mode='Markdown')
 
-
+# Поиск по ключевым словам или по целому слову.
 async def search_region(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not context.args:
         await update.message.reply_text("Пожалуйста, укажите часть названия региона. Пример: /search_region Москва")
